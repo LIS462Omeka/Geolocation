@@ -31,7 +31,9 @@ class GeolocationPlugin extends Omeka_Plugin_AbstractPlugin
             'response_contexts',
             'action_contexts',
             'admin_items_form_tabs',
-            'public_navigation_items'            
+            'public_navigation_items',
+            'api_extend_items',
+            'api_resources'            
             );
     
     
@@ -378,6 +380,28 @@ class GeolocationPlugin extends Omeka_Plugin_AbstractPlugin
     {
         $contributionType = $args['type'];
         echo $this->_mapForm(null, __('Find A Geographic Location For The ') . $contributionType->display_name . ':', false );
+    }
+    
+    public function filterApiResources($apiResources)
+    {
+        $apiResources['geolocation'] = array(
+                'record_type' => 'Location',
+                'actions' => array(
+                        'get',
+                        'index'
+                        ),
+                'index_params' => array('item_id')
+                );
+        
+        return $apiResources;
+    }
+    
+    public function filterApiExtendItems($extend, $args)
+    {   
+        $item = $args['record'];
+        $location = $this->_db->getTable('Location')->findLocationByItem($item, true);
+        $extend['geolocation'] = array('id'=>$location->id, 'url'=>'geolocation/' . $location->id);
+        return $extend;
     }
 
     public function hookSaveContributionForm($args)
