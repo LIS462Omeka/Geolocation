@@ -4,7 +4,7 @@
  * Location
  * @package: Omeka
  */
-class Location extends Omeka_Record_AbstractRecord implements Omeka_Api_RecordInterface
+class Location extends Omeka_Record_AbstractRecord
 {
     public $item_id;
     public $latitude;
@@ -12,16 +12,6 @@ class Location extends Omeka_Record_AbstractRecord implements Omeka_Api_RecordIn
     public $zoom_level;
     public $map_type;
     public $address;
-    
-    public function getRepresentation()
-    {
-        $location = array(
-                'item_id' => $this->item_id,
-                'lat' => $this->latitude,
-                'long' => $this->longitude
-                );
-        return $location;
-    }
     
     protected function _validate()
     {
