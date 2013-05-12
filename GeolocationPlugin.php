@@ -400,7 +400,9 @@ class GeolocationPlugin extends Omeka_Plugin_AbstractPlugin
     {   
         $item = $args['record'];
         $location = $this->_db->getTable('Location')->findLocationByItem($item, true);
-        $extend['geolocation'] = array('id'=>$location->id, 'url'=>'geolocation/' . $location->id);
+        if($location) {
+            $extend['geolocation'] = array('id'=>$location->id, 'url'=>'/geolocation/' . $location->id);
+        }
         return $extend;
     }
 
