@@ -51,7 +51,7 @@ OmekaMap.prototype = {
             center: new google.maps.LatLng(this.center.latitude, this.center.longitude),
             mapTypeId: google.maps.MapTypeId.ROADMAP,
             navigationControl: true,
-            mapTypeControl: true
+            mapTypeControl: true,
         };    
         switch (this.mapSize) {
         case 'small':
@@ -67,7 +67,7 @@ OmekaMap.prototype = {
         }
 
         this.map = new google.maps.Map(document.getElementById(this.mapDivId), mapOptions); 
-
+        this.map.setTilt(0);
         if (!this.center) {
             alert('Error: The center of the map has not been set!');
             return;
