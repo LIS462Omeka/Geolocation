@@ -11,7 +11,7 @@
             .balloon .title, .balloon .description {float:left; width: 220px;margin-bottom:1.5em;}
             .balloon img {float:right;display:block;}
             .balloon .view-item {display:block; float:left; clear:left; font-weight:bold; text-decoration:none;}
-            #map-links ul { margin: 0; overflow-y:auto; list-style:square;}
+            #map-links ul { margin: 0; list-style:square;}
             #map-links a {
                 display:block;
             }
@@ -25,11 +25,10 @@
 ?>
 
 <?php echo head(array('title'=>$title)); ?>
-
+<?php echo pagination_links(); ?>
+<div style='clear:both'></div>
 <div id="geolocation-browse">
-    <div class="pagination">
-        <?php echo pagination_links(); ?>
-    </div><!-- end pagination -->
+        
     
     <div id="map_block">
         <?php echo $this->googleMap('map_browse', array('loadKml'=>true, 'list'=>'map-links'));?>
