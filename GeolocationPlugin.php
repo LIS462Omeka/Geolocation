@@ -41,7 +41,6 @@ class GeolocationPlugin extends Omeka_Plugin_AbstractPlugin
     {
         if(plugin_is_active('Contribution')) {
             $this->_hooks[] = 'contribution_type_form';
-            //$this->_hooks[] = 'contribution_save_form';
         }
         parent::setUp();
     }
@@ -404,11 +403,6 @@ class GeolocationPlugin extends Omeka_Plugin_AbstractPlugin
             $extend['geolocation'] = array('id'=>$location->id, 'url'=>'/geolocation/' . $location->id);
         }
         return $extend;
-    }
-
-    public function hookSaveContributionForm($args)
-    {
-        
     }
     
     /**
