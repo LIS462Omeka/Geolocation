@@ -56,6 +56,19 @@
             ?>
         </div>
     </div>
+</div>		
+        <div class="field">	
+        <div class="two columns alpha">
+            <?php echo $this->formLabel('map_key',
+                __('Google Maps API Key')); ?>
+        </div>
+        <div class="inputs five columns omega">		
+ 		<p class="explanation">
+            <?php echo $this->('Enter a Google Maps API key. Optional.'); ?>
+        </p>
+        <?php echo $this->formText('geolocation_gmaps_key', get_option('geolocation_gmaps_key')
+ 	</div>		
+  </div> 
 </fieldset>
 <fieldset id="fieldset-geolocation-browse">
     <legend><?php echo __('Browse Map Settings'); ?></legend>
