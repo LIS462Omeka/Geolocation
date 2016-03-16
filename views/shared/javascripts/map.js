@@ -65,6 +65,7 @@ OmekaMap.prototype = {
         switch (omekaMapType) {
         case 'hybrid': return google.maps.MapTypeId.HYBRID;
         case 'satellite': return google.maps.MapTypeId.SATELLITE;
+        case 'terrain': return google.maps.MapTypeId.TERRAIN
         case 'watercolor': return google.maps.MapTypeId.WATERCOLOR;
         case 'roadmap':
         default: return google.maps.MapTypeId.ROADMAP;
@@ -82,7 +83,17 @@ OmekaMap.prototype = {
             center: new google.maps.LatLng(this.center.latitude, this.center.longitude),
             mapTypeId: this.convertMapType(this.options.mapType),
         };
-
+        //Add Stamen Watercolor tiles
+        var layer = "watercolor";
+        var map = new google.maps.Map(document.getElementById("element_id"), {
+            center: new google.maps.LatLng(this.center.latitude, this.center.longitude),
+            zoom: this.center.zoomLevel,
+            mapTypeId: layer,
+            mapTypeControlOptions: {
+            mapTypeIds: [layer]
+        });
+        map.mapTypes.set(layer, new google.maps.StamenMapType(layer));
+        
         jQuery.extend(mapOptions, this.options.mapOptions);
 
         this.map = new google.maps.Map(document.getElementById(this.mapDivId), mapOptions);
