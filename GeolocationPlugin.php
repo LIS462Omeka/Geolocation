@@ -95,6 +95,7 @@ class GeolocationPlugin extends Omeka_Plugin_AbstractPlugin
             `map_type` VARCHAR( 255 ) NOT NULL DEFAULT '',
             `address` text COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
             `description` mediumtext COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+            `geolocation_gmaps_key` text DEFAULT '',
             PRIMARY KEY (`id`),
             INDEX (`item_id`)
         ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;";
@@ -113,6 +114,7 @@ class GeolocationPlugin extends Omeka_Plugin_AbstractPlugin
             // If necessary, upgrade the plugin options
             // Check for old plugin options, and if necessary, transfer to new options
             $options = array(
+                'gmaps_key',
                 'default_latitude',
                 'default_longitude',
                 'default_zoom_level',
@@ -125,7 +127,6 @@ class GeolocationPlugin extends Omeka_Plugin_AbstractPlugin
                     delete_option('geo_' . $option);
                 }
             }
-            delete_option('geo_gmaps_key');
         }
 
         if (version_compare($args['old_version'], '2.2.3', '<')) {
@@ -276,7 +277,7 @@ class GeolocationPlugin extends Omeka_Plugin_AbstractPlugin
     public function hookAdminHead($args)
     {
         queue_css_file('geolocation-marker');
-        queue_js_url('//maps.google.com/maps/api/js');
+        queue_js_url('//maps.google.com/maps/api/js',$options=array('geolocation_gmaps_key'));
         queue_js_file('map');
         queue_js_url('//stamen-maps.a.ssl.fastly.net/js/');
         queue_js_file('tile.stamen');
