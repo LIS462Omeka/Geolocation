@@ -155,7 +155,7 @@ class GeolocationPlugin extends Omeka_Plugin_AbstractPlugin
             $sql = "
                 UPDATE `{$db->Location}`
                 SET `map_type` = ''
-                WHERE `map_type` NOT IN ('roadmap', 'satellite', 'hybrid', 'terrain');
+                WHERE `map_type` NOT IN ('roadmap', 'satellite', 'hybrid', 'terrain','watercolor');
             ";
             $db->query($sql);
         }
