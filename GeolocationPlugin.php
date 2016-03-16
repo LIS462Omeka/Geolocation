@@ -278,13 +278,18 @@ class GeolocationPlugin extends Omeka_Plugin_AbstractPlugin
         queue_css_file('geolocation-marker');
         queue_js_url('//maps.google.com/maps/api/js');
         queue_js_file('map');
+        queue_js_url('//stamen-maps.a.ssl.fastly.net/js/');
+        queue_js_file('tile.stamen');
+        
     }
 
     public function hookPublicHead($args)
     {
         queue_css_file('geolocation-marker');
         queue_js_url('//maps.google.com/maps/api/js');
-        queue_js_file('map');
+        queue_js_file('map');.
+        queue_js_url('//stamen-maps.a.ssl.fastly.net/js/');
+        queue_js_file('tile.stamen');
     }
 
     public function hookAfterSaveItem($args)
