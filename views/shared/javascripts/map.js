@@ -53,19 +53,24 @@ OmekaMap.prototype = {
             this.map.fitBounds(this.markerBounds);
         }
     },
-
+    // Helper to add Stamen watercolor map type.
+    var options = {
+                  mapTypeId: "Watercolor",
+                };
+                var map = new google.maps.Map(document.getElementById("map"), options);
+                map.mapTypes.set("Watercolor", new google.maps.StamenMapType("watercolor"));
+            }
     // Helper to convert the map type from Omeka to Google.
     convertMapType: function (omekaMapType) {
         switch (omekaMapType) {
         case 'hybrid': return google.maps.MapTypeId.HYBRID;
         case 'satellite': return google.maps.MapTypeId.SATELLITE;
-        case 'terrain': return google.maps.MapTypeId.TERRAIN;
+        case 'watercolor': return google.maps.MapTypeId.WATERCOLOR;
         case 'roadmap':
         default: return google.maps.MapTypeId.ROADMAP;
         }
     },
-
-    initMap: function () {
+  initMap: function () {
         if (!this.center) {
             alert('Error: The center of the map has not been set!');
             return;
